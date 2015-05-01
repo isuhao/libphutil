@@ -305,6 +305,9 @@ final class PhutilLDAPAuthAdapter extends PhutilAuthAdapter {
           'port' => $this->port,
         ));
 
+	  // Hack since we used self-signed certificates
+	  putenv('LDAPTLS_REQCERT=never');
+
       $conn = @ldap_connect($host, $this->port);
 
       $profiler->endServiceCall(
